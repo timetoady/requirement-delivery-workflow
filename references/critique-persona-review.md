@@ -27,6 +27,10 @@ Use whichever browser driver is available, in this fallback order:
 Detect what is available first; if none of 1-4 are present, degrade to the manual fallback rather than
 blocking. Note in the critique which driver was used (or that it was manual).
 
+If there is no visual access at all (no driver, and the developer cannot supply screenshots or a
+recording), do not invent a UX score: inspect the UI from code/markup, base UX/DX on that, and mark
+UX/DX as `unverified` in the scores rather than guessing a number.
+
 Critique real UX:
 - can the persona complete the core task without confusion?
 - clarity of labels, flow, and primary calls to action

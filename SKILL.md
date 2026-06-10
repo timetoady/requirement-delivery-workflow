@@ -53,6 +53,7 @@ These apply across every phase, not just one.
 - Default passing bar: every dimension >= 7 and overall >= 8 (adjust per task and record the chosen bar).
 - Scoring should be done by an agent that did **not** produce the work, to limit self-grading bias and reward-hacking.
 - Prefer objective, checkable evidence (tests pass, output matches spec) over vibes.
+- A rubric score may not increase without a backing diff or a newly-passing check; reject score bumps that are not tied to a real change.
 - See [references/quality-rubric-template.md](references/quality-rubric-template.md).
 
 ### Supervisor / sub-agent pattern
@@ -133,6 +134,7 @@ These apply across every phase, not just one.
 - For projects with a user interface:
   - launch the running app and drive it as a target user persona, capturing screenshots and observed behavior
   - use whichever browser driver is available, in this fallback order: Claude-in-Chrome or Claude Preview MCP -> Playwright -> Chrome DevTools (CDP / chrome-devtools MCP) -> manual screenshot-and-describe
+  - if no driver is available and the developer cannot supply screenshots or a recording, do not guess a UX number: inspect the UI from code/markup, score UX/DX from that, and mark UX/DX as `unverified` rather than inventing a score
   - critique real UX: clarity, flow, error states, accessibility basics, and whether a real user can complete the core task
 - For non-UI work (libraries, CLIs, APIs):
   - critique developer experience instead: API ergonomics, CLI output and help, error messages, naming, and docs
@@ -150,6 +152,7 @@ These apply across every phase, not just one.
   - if it is below the passing bar and under the iteration cap (default 2-3 iterations), dispatch improvement worker(s) with the specific named gaps to close
   - re-run relevant checks and re-score
   - stop when any of these is true: the passing bar is reached, gains drop below ~1 point per iteration (diminishing returns), or the iteration cap is hit
+  - if the cap is hit while still below the passing bar, stop and present options (ship-with-gaps / descope / escalate); never silently keep looping
 - Guard against reward-hacking:
   - keep scoring tied to objective evidence where possible
   - the scorer should not be the same agent that just made the improvement
@@ -206,6 +209,7 @@ These apply across every phase, not just one.
 - Treat the workflow as hard-gated.
 - Always wait for explicit developer feedback before moving from one phase to the next.
 - Do not combine phases for speed.
+- Express lane (exception): for genuinely trivial changes, the developer may explicitly pre-approve running the build-and-harden phases (MVP through the quality-gate loop) in a single pass. Absent that explicit pre-approval, keep every gate.
 - Do not treat "keep going" implications as approval if the phase checkpoint has not been surfaced explicitly.
 - Treat approvals as phase-local and non-transferable; each checkpoint requires fresh confirmation.
 - Keep the next phase in mind and remind the developer what comes next, but stop until they confirm.

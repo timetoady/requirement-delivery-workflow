@@ -34,6 +34,7 @@ Add or drop dimensions per task, but record the final set in the requirements do
 - Tie scores to objective evidence wherever possible: tests pass, output matches spec, persona task completes.
 - A score is not credible without a one-line justification and, where relevant, the evidence behind it.
 - Do not let a score rise without a corresponding real change; "re-scored higher" with no diff is a red flag.
+- Hard rule: a score may not increase unless a diff or a newly-passing check backs it. Reject any unbacked score bump.
 
 ## Quality-Gate Loop (bounded)
 
@@ -45,5 +46,6 @@ Add or drop dimensions per task, but record the final set in the requirements do
    - the passing bar is reached
    - gains drop below ~1 point per iteration (diminishing returns)
    - the iteration cap is hit
+   - if the cap is hit while still below the bar, stop and present options (ship-with-gaps / descope / escalate) rather than silently looping
 5. Present a short score history: iteration -> per-dimension scores -> what changed.
 6. The developer's approval is the final gate regardless of score. Record any accepted residual gaps.
