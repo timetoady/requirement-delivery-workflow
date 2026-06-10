@@ -65,6 +65,16 @@ references/               # templates and methodology guides
   (Claude-in-Chrome / Claude Preview MCP → Playwright → Chrome DevTools → manual) and degrades to a
   developer-experience critique for non-UI work.
 
+## Roadmap / status
+
+- **Living skill.** This is expected to be refined as it is used in real delivery work; treat the
+  current phases, rubric defaults, and iteration caps as sensible starting points, not fixed law.
+- **Plugin packaging — deferred (future option).** This ships as a plain skill on purpose, to stay
+  portable across agent platforms (Claude Code, Codex, Antigravity, Copilot, etc.) and to avoid
+  enterprise plugin-approval friction. Packaging it as an installable `/plugin` (with
+  `plugin.json` + `marketplace.json`, and optionally hooks to enforce the live tracker or the quality
+  gate) remains a clean, low-cost upgrade if/when those constraints don't apply.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
